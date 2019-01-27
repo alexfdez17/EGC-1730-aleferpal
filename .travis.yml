@@ -8,10 +8,11 @@ env:
 - DJANGO=2.0 DB=postgres
 global:
 - PGPORT=5432
+before_install:
+- cd decide
 install:
 - pip install -r ../requirements.txt
 before_script:
-- cd decide
 - cp local_settings.example.py local_settings.py
 - psql -c "create user decide with password 'decide'"
 - psql -c "create database decide owner decide"
@@ -19,5 +20,4 @@ before_script:
 script:
 - python manage.py test
 addons:
-  postgresql: '9.6'
-
+postgresql: '9.6'
